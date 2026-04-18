@@ -80,7 +80,7 @@ services:
     depends_on:
       - redis
       - postgres
-    command: /app/.venv/bin/celery -A app.workers.session_cleanup worker -B --loglevel=info
+    command: /app/.venv/bin/celery -A app.workers.session_cleanup worker -B --loglevel=info --schedule=/tmp/celerybeat-schedule
 
   # ── Frontend ───────────────────────────────────────────────────────────────
   frontend:
