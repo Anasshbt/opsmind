@@ -9,7 +9,7 @@ x-backend-env: &backend-env
   REDIS_URL: "redis://redis:6379/0"
   SECRET_KEY: "dev-secret-key-change-in-production-32chars!!"
   OPENAI_API_KEY: "${OPENAI_API_KEY}"
-  ALLOWED_ORIGINS: "http://localhost:3000"
+  ALLOWED_ORIGINS: '["http://localhost:3000","http://localhost:4040"]'
   ENV: "development"
   DEBUG: "true"
   ORCHESTRATOR: "docker"
@@ -94,6 +94,8 @@ services:
       - "4040:3000"
     environment:
       VITE_API_URL: "http://localhost:4030"
+      CHOKIDAR_USEPOLLING: "true"
+      WATCHPACK_POLLING: "true"
 
   # ── Lab network (isolated) ─────────────────────────────────────────────────
   # Created automatically by DockerOrchestrator, but we pre-create it here
