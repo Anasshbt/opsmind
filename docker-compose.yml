@@ -52,6 +52,7 @@ services:
     environment: *backend-env
     volumes:
       - ./backend:/app
+      - /app/.venv                                  # preserve venv from image
       - /var/run/docker.sock:/var/run/docker.sock  # orchestrator needs Docker socket
     ports:
       - "4030:8000"
@@ -74,6 +75,7 @@ services:
     environment: *backend-env
     volumes:
       - ./backend:/app
+      - /app/.venv                                  # preserve venv from image
       - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       - redis
