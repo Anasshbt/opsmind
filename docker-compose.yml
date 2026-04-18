@@ -62,8 +62,8 @@ services:
         condition: service_healthy
     command: >
       sh -c "
-        alembic upgrade head &&
-        uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload --reload-dir app
+        /app/.venv/bin/alembic upgrade head &&
+        /app/.venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload --reload-dir app
       "
 
   # ── Celery Worker ──────────────────────────────────────────────────────────
@@ -78,7 +78,7 @@ services:
     depends_on:
       - redis
       - postgres
-    command: celery -A app.workers.session_cleanup worker -B --loglevel=info
+    command: /app/.venv/bin/celery -A app.workers.session_cleanup worker -B --loglevel=info
 
   # ── Frontend ───────────────────────────────────────────────────────────────
   frontend:
