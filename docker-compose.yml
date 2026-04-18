@@ -26,7 +26,7 @@ services:
     volumes:
       - pg_data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "4010:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U opsmind"]
       interval: 10s
@@ -38,7 +38,7 @@ services:
     volumes:
       - redis_data:/data
     ports:
-      - "6379:6379"
+      - "4020:6379"
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
@@ -54,7 +54,7 @@ services:
       - ./backend:/app
       - /var/run/docker.sock:/var/run/docker.sock  # orchestrator needs Docker socket
     ports:
-      - "8000:8000"
+      - "4030:8000"
     depends_on:
       postgres:
         condition: service_healthy
@@ -89,9 +89,9 @@ services:
       - ./frontend:/app
       - /app/node_modules
     ports:
-      - "3000:3000"
+      - "4040:3000"
     environment:
-      VITE_API_URL: "http://localhost:8000"
+      VITE_API_URL: "http://localhost:4030"
 
   # ── Lab network (isolated) ─────────────────────────────────────────────────
   # Created automatically by DockerOrchestrator, but we pre-create it here

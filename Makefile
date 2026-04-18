@@ -8,31 +8,31 @@ help: ## Show this help
 
 # ── Dev ───────────────────────────────────────────────────────────────────────
 
-dev: ## Start full stack (docker compose)
-	docker compose up --build
+dev: ## Start full stack (docker-compose)
+	docker-compose up --build
 
 dev-bg: ## Start full stack in background
-	docker compose up --build -d
+	docker-compose up --build -d
 
 stop: ## Stop all services
-	docker compose down
+	docker-compose down
 
 logs: ## Follow logs
-	docker compose logs -f
+	docker-compose logs -f
 
 # ── Backend ───────────────────────────────────────────────────────────────────
 
 backend-shell: ## Shell into backend container
-	docker compose exec backend bash
+	docker-compose exec backend bash
 
 migrate: ## Run Alembic migrations
-	docker compose exec backend alembic upgrade head
+	docker-compose exec backend alembic upgrade head
 
 migrate-new: ## Create new migration (NAME=description)
-	docker compose exec backend alembic revision --autogenerate -m "$(NAME)"
+	docker-compose exec backend alembic revision --autogenerate -m "$(NAME)"
 
 seed: ## Seed database with sample data
-	docker compose exec backend python ../infra/scripts/seed_db.py
+	docker-compose exec backend python ../infra/scripts/seed_db.py
 
 test-backend: ## Run backend tests
 	cd $(BACKEND_DIR) && uv run pytest -v --tb=short
