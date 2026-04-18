@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: opsmind
+  labels:
+    app.kubernetes.io/part-of: opsmind
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: opsmind-labs
+  labels:
+    app.kubernetes.io/part-of: opsmind
+    opsmind.io/purpose: lab-sandbox

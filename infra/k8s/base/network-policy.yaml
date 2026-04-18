@@ -1,0 +1,37 @@
+# Block all egress from lab pods — they get NO internet access.
+# They can only talk to nothing outside the pod itself.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-all-lab-egress
+  namespace: opsmind-labs
+spec:
+  podSelector:
+    matchLabels:
+      app: opsmind-lab
+  policyTypes:
+    - Egress
+    - Ingress
+  # No egress rules = deny all egress
+  # No ingress rules = deny all ingress (except from opsmind namespace via next policy)
+---
+# Allow the backend (in opsmind namespace) to reach lab pods on port 22 / exec
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-backend-to-labs
+  namespace: opsmind-labs
+spec:
+  podSelector:
+    matchLabels:
+      app: opsmind-lab
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: opsmind
+          podSelector:
+            matchLabels:
+              app: opsmind-backend

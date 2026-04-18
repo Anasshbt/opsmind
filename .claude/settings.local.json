@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(read d *)",
+      "Bash(apt list *)",
+      "Bash(systemctl is-active *)"
+    ]
+  }
+}
