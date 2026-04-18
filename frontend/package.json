@@ -33,6 +33,7 @@
     "@radix-ui/react-progress": "^1.1.0",
     "@radix-ui/react-tabs": "^1.1.1",
     "@radix-ui/react-tooltip": "^1.1.4",
+    "react-hook-form": "^7.54.0",
     "recharts": "^2.13.3"
   },
   "devDependencies": {

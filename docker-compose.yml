@@ -9,7 +9,7 @@ x-backend-env: &backend-env
   REDIS_URL: "redis://redis:6379/0"
   SECRET_KEY: "dev-secret-key-change-in-production-32chars!!"
   OPENAI_API_KEY: "${OPENAI_API_KEY}"
-  ALLOWED_ORIGINS: '["http://localhost:3000","http://localhost:4040"]'
+  ALLOWED_ORIGINS: "http://localhost:3000,http://localhost:4040"
   ENV: "development"
   DEBUG: "true"
   ORCHESTRATOR: "docker"
